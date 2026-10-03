@@ -70,6 +70,7 @@ The algorithms you will see referenced everywhere, and the one thing each change
 | Truncated importance sampling | Corrects for the gap between the inference engine's and trainer's token probabilities | [Yao et al. 2025](https://fengyao.notion.site/off-policy-rl) |
 | On-policy distillation | Student samples, teacher scores every token (reverse KL): dense reward at RL-like cost | [GKD](https://arxiv.org/abs/2306.13649), [Thinking Machines](https://thinkingmachines.ai/blog/on-policy-distillation/) |
 | Multi-teacher on-policy distillation | Train domain experts with RL separately, then merge them into one student via on-policy distillation instead of multi-task RL | [MiMo-V2-Flash](https://arxiv.org/abs/2601.02780), [DeepSeek-V4](https://arxiv.org/abs/2606.19348) |
+| On-policy self-distillation | No external teacher: the same model, given privileged context (the solution, a demo, or feedback), supervises its own rollouts token by token | [OPSD](https://arxiv.org/abs/2601.18734), [SDPO](https://arxiv.org/abs/2601.20802) |
 | Rubric / checklist rewards | An LLM judge grades against explicit criteria, extending RL to non-verifiable tasks | [Rubrics as Rewards](https://arxiv.org/abs/2507.17746) |
 
 ### Essays worth rereading
@@ -196,7 +197,11 @@ For distillation inside full post-training pipelines, see MiMo-V2-Flash, Nemotro
 - [MiniLLM: On-Policy Distillation of Large Language Models](https://arxiv.org/abs/2306.08543) - Reverse-KL distillation for generative models.
 - [On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/abs/2306.13649) - GKD: distill on student-generated sequences.
 - [On-Policy Distillation](https://thinkingmachines.ai/blog/on-policy-distillation/) - Thinking Machines: dense teacher supervision on student rollouts matches RL at a fraction of the cost.
+- [Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models](https://arxiv.org/abs/2601.18734) - OPSD: no separate teacher. The same model, given the reference solution in its context, grades its own on-policy rollouts token by token. Cheaper in tokens than RL and better than off-policy distillation.
+- [Self-Distillation Enables Continual Learning](https://arxiv.org/abs/2601.19897) - SDFT: learn from demonstrations on-policy by using the demo-conditioned model as the teacher. Picks up new skills with much less forgetting than SFT.
+- [Reinforcement Learning via Self-Distillation](https://arxiv.org/abs/2601.20802) - SDPO: the model conditioned on feedback (errors, or a successful sibling rollout) becomes a dense self-teacher, beating RLVR baselines on sample efficiency.
 - [MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training](https://arxiv.org/abs/2606.30406) - The method behind MiMo's post-training, studied in isolation on open models: merge RL-trained domain teachers into one student.
+- [Rethinking On-Policy Self-Distillation for Thinking Models](https://arxiv.org/abs/2607.05184) - The counterpoint: privileged-context self-distillation can cut accuracy by up to 17% on thinking models because it suppresses the verification and backtracking that long reasoning needs.
 
 ## 10. Agentic and multi-turn RL
 
