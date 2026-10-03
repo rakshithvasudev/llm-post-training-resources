@@ -69,6 +69,7 @@ The algorithms you will see referenced everywhere, and the one thing each change
 | GSPO | Importance ratio and clipping at the sequence level instead of per token; stabilizes MoE RL | [Zheng et al. 2025](https://arxiv.org/abs/2507.18071) |
 | Truncated importance sampling | Corrects for the gap between the inference engine's and trainer's token probabilities | [Yao et al. 2025](https://fengyao.notion.site/off-policy-rl) |
 | On-policy distillation | Student samples, teacher scores every token (reverse KL): dense reward at RL-like cost | [GKD](https://arxiv.org/abs/2306.13649), [Thinking Machines](https://thinkingmachines.ai/blog/on-policy-distillation/) |
+| Multi-teacher on-policy distillation | Train domain experts with RL separately, then merge them into one student via on-policy distillation instead of multi-task RL | [MiMo-V2-Flash](https://arxiv.org/abs/2601.02780), [DeepSeek-V4](https://arxiv.org/abs/2606.19348) |
 | Rubric / checklist rewards | An LLM judge grades against explicit criteria, extending RL to non-verifiable tasks | [Rubrics as Rewards](https://arxiv.org/abs/2507.17746) |
 
 ### Essays worth rereading
@@ -190,6 +191,7 @@ Papers that try to explain why RLVR works, and where it doesn't.
 - [On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/abs/2306.13649) - GKD: distill on student-generated sequences.
 - [MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2306.08543) - Reverse-KL distillation for generative models.
 - [On-Policy Distillation](https://thinkingmachines.ai/blog/on-policy-distillation/) - Thinking Machines: dense teacher supervision on student rollouts matches RL at a fraction of the cost.
+- [MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training](https://arxiv.org/abs/2606.30406) - The method behind MiMo's post-training, studied in isolation on open models: merge RL-trained domain teachers into one student.
 - [Nemotron-Cascade 2](https://arxiv.org/abs/2603.19220) - Multi-domain on-policy distillation used to merge separately RL-trained domain experts.
 
 ## 10. Agentic and multi-turn RL
@@ -276,7 +278,7 @@ RL for LLMs is mostly an inference problem with a training step attached. These 
 
 Read these for what labs actually do. The post-training sections are usually the most candid part.
 
-**Fully open recipes** (data, code, and checkpoints released)
+**Open recipes** (post-training data, code, or RL environments released)
 
 - [Tülu 3](https://arxiv.org/abs/2411.15124) - SFT → DPO → RLVR with every ablation published.
 - [SmolLM3: smol, multilingual, long-context reasoner](https://huggingface.co/blog/smollm3) - Dual-mode reasoning in a 3B model, with mid-training, SFT, and APO all released.
@@ -284,6 +286,9 @@ Read these for what labs actually do. The post-training sections are usually the
 - [INTELLECT-3: Technical Report](https://arxiv.org/abs/2512.16144) - Large-scale RL on a 100B+ MoE with prime-rl and community-built verifiers environments.
 - [Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation](https://arxiv.org/abs/2603.19220) - Sequential domain-wise RL stages, then on-policy distillation to merge them, with data released.
 - [Nemotron 3 Super](https://arxiv.org/abs/2604.12374) - Open hybrid Mamba-Transformer MoE with an agent-focused SFT and multi-environment RL pipeline and released post-training data.
+- [Nemotron 3 Ultra Technical Report](https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf) - The largest Nemotron 3 model, with its agent-focused post-training pipeline and the Nemotron-Posttraining-v3 datasets.
+- [Instella-MoE Technical Report](https://arxiv.org/abs/2609.00791) - Fully open MoE whose post-training runs SFT, DPO, instruction-following RL, then multi-teacher on-policy distillation.
+- [MiMo-V2.6 Technical Report](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL/blob/main/MiMo_V2_6_technical_report.pdf) - The most open frontier-scale RL run so far: asynchronous GRPO at ~25k trajectories per step, a cost breakdown (rollouts vs. training vs. grader), and multi-prefix multi-teacher on-policy distillation. Ships with ~7,000 [RL environments and verifiers](https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss) and the [training framework](https://github.com/XiaomiMiMo/verl).
 
 **Open-weight frontier models**
 
@@ -294,13 +299,22 @@ Read these for what labs actually do. The post-training sections are usually the
 - [Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534) - Agentic data synthesis and joint RL with verifiable and self-critique rubric rewards.
 - [GLM-4.5](https://arxiv.org/abs/2508.06471) - Expert models per domain, unified by self-distillation; the slime RL stack.
 - [gpt-oss-120b & gpt-oss-20b Model Card](https://arxiv.org/abs/2508.10925) - OpenAI's open-weight reasoning models: CoT-RL training, variable reasoning effort, and safety evaluations.
+- [Introducing LongCat-Flash-Thinking: A Technical Report](https://arxiv.org/abs/2509.18883) - DORA, an asynchronous rollout orchestration system that trains >3x faster than synchronous RL, and domain-parallel RL with later fusion.
 - [DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models](https://arxiv.org/abs/2512.02556) - Scaled-up GRPO with unbiased KL estimation and off-policy masking, plus large-scale synthetic agent environments.
+- [MiMo-V2-Flash Technical Report](https://arxiv.org/abs/2601.02780) - Introduces multi-teacher on-policy distillation (MOPD): domain teachers trained by RL, merged into one student with dense token-level rewards plus outcome rewards.
+- [LongCat-Flash-Thinking-2601 Technical Report](https://arxiv.org/abs/2601.16725) - Scaling DORA to multi-environment agentic RL across 10,000+ environments in 20+ domains.
 - [Kimi K2.5: Visual Agentic Intelligence](https://arxiv.org/abs/2602.02276) - Parallel-Agent RL (PARL): training a model to spawn and coordinate sub-agents.
+- [Step 3.5 Flash: Open Frontier-Level Intelligence with 11B Active Parameters](https://arxiv.org/abs/2602.10604) - Combines verifiable rewards and preference feedback in one RL framework built to stay stable under large-scale off-policy training.
 - [GLM-5: from Vibe Coding to Agentic Engineering](https://arxiv.org/abs/2602.15763) - Asynchronous agentic RL at frontier scale.
+- [Qwen3.5: Towards Native Multimodal Agents](https://qwen.ai/blog?id=qwen3.5) - Qwen attributes most of the post-training gains to scaling RL across virtually all tasks and environments.
 - [Qwen3-Coder-Next Technical Report](https://arxiv.org/abs/2603.00729) - Agentic coding RL on large numbers of executable environments.
 - [The MiniMax-M2 Series: Mini Activations Unleashing Max Real-World Intelligence](https://arxiv.org/abs/2605.26494) - Interleaved-thinking agent model trained with large-scale agentic RL.
 - [DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence](https://arxiv.org/abs/2606.19348) - Specialist experts trained separately, consolidated by on-policy distillation; FP4 QAT during post-training.
+- [Ling and Ring 2.6 Technical Report](https://arxiv.org/abs/2606.15079) - Trillion-scale instant (Ling) and reasoning (Ring) models: Evo-CoT, shortest-correct-response distillation for token efficiency, and the KPop async RL framework.
+- [Gemma 4 Technical Report](https://arxiv.org/abs/2607.02770) - Small open models (2B-31B) with a thinking mode and quantization-aware training; useful as a reference for post-training at small scale.
 - [Kimi K3: Open Frontier Intelligence](https://arxiv.org/abs/2607.24653) - RL across general, agentic, and coding domains with multiple reasoning-effort levels, and QAT throughout SFT and RL.
+- [GLM-5.3](https://z.ai/blog/glm-5.3) - Same base model as GLM-5.2; every gain comes from scaling post-training alone (more environments, longer runs on slime). The clearest public case that post-training scale is now a lever on its own.
+- [DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression](https://arxiv.org/abs/2609.19969) - Mostly architecture (cross-layer KV reuse, FP4 KV cache), but worth reading for how cheaper inference changes the economics of RL rollouts.
 
 **Reasoning-focused reports**
 
@@ -316,6 +330,7 @@ Read these for what labs actually do. The post-training sections are usually the
 - [OpenThoughts3](https://huggingface.co/datasets/open-thoughts/OpenThoughts3-1.2M) - 1.2M reasoning traces for SFT.
 - [NuminaMath-1.5](https://huggingface.co/datasets/AI-MO/NuminaMath-1.5) - Competition math problems with solutions, a common RLVR prompt source.
 - [OpenMathReasoning](https://arxiv.org/abs/2504.16891) - Large math reasoning corpus behind the AIMO-2 winning solution.
+- [MiMo-V2.6-RL-oss](https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss) - ~7,000 RL environments with verifiers across code, cyber, knowledge work, web, and music, from a frontier RL run.
 - [SWE-smith dataset](https://huggingface.co/datasets/SWE-bench/SWE-smith) - Synthetic executable SWE tasks for agent training.
 
 ## 17. Evaluation
