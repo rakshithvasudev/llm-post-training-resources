@@ -104,6 +104,9 @@ Enough RL to read the post-training literature without getting lost. In reading 
 - [s1: Simple test-time scaling](https://arxiv.org/abs/2501.19393) - 1,000 examples of SFT plus "budget forcing" for test-time scaling.
 - [LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387) - A few hundred long reasoning traces unlock reasoning in a strong base model.
 - [OpenThoughts: Data Recipes for Reasoning Models](https://arxiv.org/abs/2506.04178) - Systematic ablations of reasoning SFT data: sources, filtering, teachers, and scale.
+- [Supervised Fine Tuning on Curated Data is Reinforcement Learning (and can be improved)](https://arxiv.org/abs/2507.12856) - iw-SFT: SFT on filtered data optimizes a loose lower bound on the RL objective; importance weighting tightens it.
+- [On the Generalization of SFT: A Reinforcement Learning Perspective with Reward Rectification](https://arxiv.org/abs/2508.05629) - DFT: the SFT gradient is a policy gradient with an implicit reward that blows up on low-probability tokens. Rescaling each token's loss by its probability fixes it, in one line of code.
+- [Iterative SFT (iSFT): dense reward learning](https://parsed.com/research/iterative-sft) - Parsed: the model drafts, an LLM judge explains what failed, the model revises until it passes, and you SFT on the result. Gets far more signal per example than a scalar RL reward, using plain SFT infrastructure.
 
 ## 3. RLHF: reward models and PPO
 
