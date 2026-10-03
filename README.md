@@ -35,7 +35,7 @@ The list is ordered so it can be read top to bottom. Each section starts with th
 
 ## 0. Start here
 
-If you read nothing else, read these. Together they cover the full modern pipeline: SFT, preference tuning, and RL with verifiable rewards.
+If you read nothing else, read these. Together they cover the full modern pipeline: SFT, preference tuning, and RL with verifiable rewards. Most also appear in their topical sections below.
 
 - [RLHF Book](https://rlhfbook.com/) - Nathan Lambert's free textbook on RLHF and post-training, from instruction tuning to reasoning RL. Now has a companion lecture series.
 - [Training language models to follow instructions with human feedback (InstructGPT)](https://arxiv.org/abs/2203.02155) - The SFT → reward model → PPO pipeline that defined the field.
@@ -83,14 +83,14 @@ Short pieces that shape how good post-training researchers think about what to w
 
 ## 1. RL foundations
 
-Enough RL to read the post-training literature without getting lost.
+Enough RL to read the post-training literature without getting lost. In reading order rather than by date.
 
 - [Reinforcement Learning: An Introduction (Sutton & Barto)](http://incompleteideas.net/book/the-book-2nd.html) - The standard textbook. Chapters 2, 3, and 13 are the most relevant.
 - [Spinning Up in Deep RL](https://spinningup.openai.com/) - Concise derivations of policy gradients, with clean reference implementations.
 - [Policy Gradient Algorithms](https://lilianweng.github.io/posts/2018-04-08-policy-gradient/) - Lilian Weng's tour from REINFORCE to PPO.
 - [Deep Reinforcement Learning: Pong from Pixels](http://karpathy.github.io/2016/05/31/rl/) - The intuition behind policy gradients in under an hour.
-- [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347) - PPO, the clipped surrogate objective that most LLM RL still descends from.
 - [High-Dimensional Continuous Control Using Generalized Advantage Estimation](https://arxiv.org/abs/1506.02438) - GAE, the advantage estimator inside PPO-based RLHF.
+- [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347) - PPO, the clipped surrogate objective that most LLM RL still descends from.
 - [Approximating KL Divergence](http://joschu.net/blog/kl-approx.html) - John Schulman's note on the k1/k2/k3 estimators used for KL penalties in nearly every RL trainer.
 
 ## 2. Supervised fine-tuning and instruction data
@@ -101,8 +101,8 @@ Enough RL to read the post-training literature without getting lost.
 - [Alpaca: A Strong, Replicable Instruction-Following Model](https://crfm.stanford.edu/2023/03/13/alpaca.html) - Cheap SFT on distilled data, and the start of the open chat-model wave.
 - [LIMA: Less Is More for Alignment](https://arxiv.org/abs/2305.11206) - 1,000 curated examples are enough for strong SFT. The "superficial alignment hypothesis."
 - [Zephyr: Direct Distillation of LM Alignment](https://arxiv.org/abs/2310.16944) - Distilled SFT plus DPO on AI feedback, a template many open models followed.
-- [LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387) - A few hundred long reasoning traces unlock reasoning in a strong base model.
 - [s1: Simple test-time scaling](https://arxiv.org/abs/2501.19393) - 1,000 examples of SFT plus "budget forcing" for test-time scaling.
+- [LIMO: Less is More for Reasoning](https://arxiv.org/abs/2502.03387) - A few hundred long reasoning traces unlock reasoning in a strong base model.
 - [OpenThoughts: Data Recipes for Reasoning Models](https://arxiv.org/abs/2506.04178) - Systematic ablations of reasoning SFT data: sources, filtering, teachers, and scale.
 
 ## 3. RLHF: reward models and PPO
@@ -110,37 +110,37 @@ Enough RL to read the post-training literature without getting lost.
 - [Deep reinforcement learning from human preferences](https://arxiv.org/abs/1706.03741) - Learning a reward model from pairwise human comparisons.
 - [Fine-Tuning Language Models from Human Preferences](https://arxiv.org/abs/1909.08593) - The first application of preference-based RL to language models.
 - [Learning to summarize from human feedback](https://arxiv.org/abs/2009.01325) - RLHF at scale on summarization, with careful reward model analysis.
-- [Training a Helpful and Harmless Assistant with RLHF](https://arxiv.org/abs/2204.05862) - Anthropic's HH paper: helpfulness vs. harmlessness tension and online RLHF.
-- [Llama 2: Open Foundation and Fine-Tuned Chat Models](https://arxiv.org/abs/2307.09288) - The most detailed public account of iterative RLHF with separate helpfulness and safety reward models.
-- [Secrets of RLHF in Large Language Models Part I: PPO](https://arxiv.org/abs/2307.04964) - What makes PPO stable for LLMs, and PPO-max.
-- [The N+ Implementation Details of RLHF with PPO](https://arxiv.org/abs/2403.17031) - Reproducing OpenAI's summarization RLHF and every detail that matters. See also the [blog version](https://huggingface.co/blog/the_n_implementation_details_of_rlhf_with_ppo).
-- [Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback](https://arxiv.org/abs/2402.14740) - RLOO: drop the critic, use leave-one-out baselines.
-- [ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning LLMs](https://arxiv.org/abs/2310.10505) - REINFORCE with a greedy-decoding baseline.
+- [Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback](https://arxiv.org/abs/2204.05862) - Anthropic's HH paper: helpfulness vs. harmlessness tension and online RLHF.
 - [Scaling Laws for Reward Model Overoptimization](https://arxiv.org/abs/2210.10760) - Goodhart's law, measured: how proxy reward diverges from gold reward as you optimize.
+- [Secrets of RLHF in Large Language Models Part I: PPO](https://arxiv.org/abs/2307.04964) - What makes PPO stable for LLMs, and PPO-max.
+- [Llama 2: Open Foundation and Fine-Tuned Chat Models](https://arxiv.org/abs/2307.09288) - The most detailed public account of iterative RLHF with separate helpfulness and safety reward models.
+- [Open Problems and Fundamental Limitations of Reinforcement Learning from Human Feedback](https://arxiv.org/abs/2307.15217) - Survey of what RLHF cannot do and why.
+- [ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning Large Language Models](https://arxiv.org/abs/2310.10505) - REINFORCE with a greedy-decoding baseline.
+- [Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs](https://arxiv.org/abs/2402.14740) - RLOO: drop the critic, use leave-one-out baselines.
+- [The N+ Implementation Details of RLHF with PPO: A Case Study on TL;DR Summarization](https://arxiv.org/abs/2403.17031) - Reproducing OpenAI's summarization RLHF and every detail that matters. See also the [blog version](https://huggingface.co/blog/the_n_implementation_details_of_rlhf_with_ppo).
 - [HelpSteer2: Open-source dataset for training top-performing reward models](https://arxiv.org/abs/2406.08673) - Small, high-quality, permissively licensed preference data.
 - [Skywork-Reward-V2: Scaling Preference Data Curation via Human-AI Synergy](https://arxiv.org/abs/2507.01352) - Strong open reward models from curated preference data at scale.
-- [Open Problems and Fundamental Limitations of RLHF](https://arxiv.org/abs/2307.15217) - Survey of what RLHF cannot do and why.
 
 ## 4. Direct preference optimization
 
 - [Direct Preference Optimization: Your Language Model is Secretly a Reward Model](https://arxiv.org/abs/2305.18290) - DPO: closed-form reparameterization of the RLHF objective as a classification loss.
 - [A General Theoretical Paradigm to Understand Learning from Human Preferences](https://arxiv.org/abs/2310.12036) - IPO, and why DPO can overfit deterministic preferences.
+- [Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models](https://arxiv.org/abs/2401.01335) - SPIN: the model's own generations as the rejected side.
 - [KTO: Model Alignment as Prospect Theoretic Optimization](https://arxiv.org/abs/2402.01306) - Learning from unpaired thumbs-up/thumbs-down signals.
 - [ORPO: Monolithic Preference Optimization without Reference Model](https://arxiv.org/abs/2403.07691) - Folds preference optimization into SFT.
-- [SimPO: Simple Preference Optimization with a Reference-Free Reward](https://arxiv.org/abs/2405.14734) - Length-normalized, reference-free DPO variant.
-- [Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models](https://arxiv.org/abs/2401.01335) - SPIN: the model's own generations as the rejected side.
 - [Is DPO Superior to PPO for LLM Alignment? A Comprehensive Study](https://arxiv.org/abs/2404.10719) - When well-tuned PPO beats DPO, and why.
+- [SimPO: Simple Preference Optimization with a Reference-Free Reward](https://arxiv.org/abs/2405.14734) - Length-normalized, reference-free DPO variant.
 - [Unpacking DPO and PPO: Disentangling Best Practices for Learning from Preference Feedback](https://arxiv.org/abs/2406.09279) - Controlled comparison of data, reward model, and algorithm choices.
 
 ## 5. AI feedback, self-improvement, and rubrics
 
+- [STaR: Bootstrapping Reasoning With Reasoning](https://arxiv.org/abs/2203.14465) - Train on self-generated rationales that reach the right answer.
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Replacing human harmlessness labels with model critiques against a written constitution.
+- [Reinforced Self-Training (ReST) for Language Modeling](https://arxiv.org/abs/2308.08998) - Grow-and-improve loops of sampling, filtering, and fine-tuning.
 - [RLAIF vs. RLHF: Scaling Reinforcement Learning from Human Feedback with AI Feedback](https://arxiv.org/abs/2309.00267) - AI preference labels can match human labels.
 - [UltraFeedback: Boosting Language Models with Scaled AI Feedback](https://arxiv.org/abs/2310.01377) - The large AI-labeled preference dataset behind many open DPO models.
-- [Self-Rewarding Language Models](https://arxiv.org/abs/2401.10020) - The policy judges its own outputs and trains on them iteratively.
-- [STaR: Bootstrapping Reasoning With Reasoning](https://arxiv.org/abs/2203.14465) - Train on self-generated rationales that reach the right answer.
-- [Reinforced Self-Training (ReST) for Language Modeling](https://arxiv.org/abs/2308.08998) - Grow-and-improve loops of sampling, filtering, and fine-tuning.
 - [Beyond Human Data: Scaling Self-Training for Problem-Solving with Language Models](https://arxiv.org/abs/2312.06585) - ReST-EM: expectation-maximization view of rejection-sampling fine-tuning.
+- [Self-Rewarding Language Models](https://arxiv.org/abs/2401.10020) - The policy judges its own outputs and trains on them iteratively.
 - [Deliberative Alignment: Reasoning Enables Safer Language Models](https://arxiv.org/abs/2412.16339) - Teaching reasoning models to reason over safety specifications.
 - [Rubrics as Rewards: Reinforcement Learning Beyond Verifiable Domains](https://arxiv.org/abs/2507.17746) - Structured rubrics as reward signals for non-verifiable tasks.
 - [Checklists Are Better Than Reward Models For Aligning Language Models](https://arxiv.org/abs/2507.18624) - Instruction-specific checklists as RL rewards.
@@ -150,21 +150,21 @@ Enough RL to read the post-training literature without getting lost.
 The center of gravity since early 2025: GRPO-family algorithms on tasks with checkable answers.
 
 - [DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models](https://arxiv.org/abs/2402.03300) - Introduces GRPO: PPO without a critic, using group-normalized advantages.
-- [DeepSeek-R1](https://arxiv.org/abs/2501.12948) - R1-Zero (pure RL from base) and the multi-stage R1 recipe.
-- [Kimi k1.5: Scaling Reinforcement Learning with LLMs](https://arxiv.org/abs/2501.12599) - Long-context RL, length penalties, and long-to-short transfer.
-- [DAPO: An Open-Source LLM Reinforcement Learning System at Scale](https://arxiv.org/abs/2503.14476) - Clip-higher, dynamic sampling, token-level loss, overlong shaping.
-- [Understanding R1-Zero-Like Training: A Critical Perspective](https://arxiv.org/abs/2503.20783) - Dr. GRPO: removes GRPO's length and difficulty biases.
-- [VAPO: Efficient and Reliable Reinforcement Learning for Advanced Reasoning Tasks](https://arxiv.org/abs/2504.05118) - Value-based PPO that beats critic-free methods on long CoT.
 - [REINFORCE++: Stabilizing Critic-Free Policy Optimization with Global Advantage Normalization](https://arxiv.org/abs/2501.03262) - Global-batch advantage normalization for critic-free RL.
-- [Group Sequence Policy Optimization](https://arxiv.org/abs/2507.18071) - GSPO: sequence-level importance ratios, motivated by MoE RL instability.
-- [MiniMax-M1: Scaling Test-Time Compute Efficiently with Lightning Attention](https://arxiv.org/abs/2506.13585) - Introduces CISPO, which clips importance weights instead of updates.
-- [Open-Reasoner-Zero](https://arxiv.org/abs/2503.24290) - Minimalist, fully open reproduction of R1-Zero-style training.
+- [Kimi k1.5: Scaling Reinforcement Learning with LLMs](https://arxiv.org/abs/2501.12599) - Long-context RL, length penalties, and long-to-short transfer.
+- [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2501.12948) - R1-Zero (pure RL from base) and the multi-stage R1 recipe.
+- [DAPO: An Open-Source LLM Reinforcement Learning System at Scale](https://arxiv.org/abs/2503.14476) - Clip-higher, dynamic sampling, token-level loss, overlong shaping.
 - [SimpleRL-Zoo: Investigating and Taming Zero Reinforcement Learning for Open Base Models in the Wild](https://arxiv.org/abs/2503.18892) - Zero-RL across ten base models and what differs between them.
-- [Skywork Open Reasoner 1 Technical Report](https://arxiv.org/abs/2505.22312) - Detailed ablations on entropy collapse and data for reasoning RL.
-- [ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in LLMs](https://arxiv.org/abs/2505.24864) - Long, stable RL runs with KL control and reference resets.
-- [AceReason-Nemotron: Advancing Math and Code Reasoning through Reinforcement Learning](https://arxiv.org/abs/2505.16400) - Math-only then code-only RL stages for distilled models.
-- [Magistral](https://arxiv.org/abs/2506.10910) - Mistral's RL-from-scratch reasoning recipe and infrastructure.
+- [Understanding R1-Zero-Like Training: A Critical Perspective](https://arxiv.org/abs/2503.20783) - Dr. GRPO: removes GRPO's length and difficulty biases.
+- [Open-Reasoner-Zero: An Open Source Approach to Scaling Up Reinforcement Learning on the Base Model](https://arxiv.org/abs/2503.24290) - Minimalist, fully open reproduction of R1-Zero-style training.
+- [VAPO: Efficient and Reliable Reinforcement Learning for Advanced Reasoning Tasks](https://arxiv.org/abs/2504.05118) - Value-based PPO that beats critic-free methods on long CoT.
 - [Absolute Zero: Reinforced Self-play Reasoning with Zero Data](https://arxiv.org/abs/2505.03335) - The model proposes and solves its own tasks.
+- [AceReason-Nemotron: Advancing Math and Code Reasoning through Reinforcement Learning](https://arxiv.org/abs/2505.16400) - Math-only then code-only RL stages for distilled models.
+- [Skywork Open Reasoner 1 Technical Report](https://arxiv.org/abs/2505.22312) - Detailed ablations on entropy collapse and data for reasoning RL.
+- [ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models](https://arxiv.org/abs/2505.24864) - Long, stable RL runs with KL control and reference resets.
+- [Magistral](https://arxiv.org/abs/2506.10910) - Mistral's RL-from-scratch reasoning recipe and infrastructure.
+- [MiniMax-M1: Scaling Test-Time Compute Efficiently with Lightning Attention](https://arxiv.org/abs/2506.13585) - Introduces CISPO, which clips importance weights instead of updates, with cost accounting for large-scale RL on a hybrid-attention model.
+- [Group Sequence Policy Optimization](https://arxiv.org/abs/2507.18071) - GSPO: sequence-level importance ratios, motivated by MoE RL instability.
 - [The Art of Scaling Reinforcement Learning Compute for LLMs](https://arxiv.org/abs/2510.13786) - ScaleRL: sigmoid compute-performance curves and which design choices change the asymptote.
 
 ## 7. What RL actually does
@@ -172,27 +172,28 @@ The center of gravity since early 2025: GRPO-family algorithms on tasks with che
 Papers that try to explain why RLVR works, and where it doesn't.
 
 - [Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?](https://arxiv.org/abs/2504.13837) - At large pass@k, base models catch up. RL sharpens rather than expands.
-- [Spurious Rewards: Rethinking Training Signals in RLVR](https://arxiv.org/abs/2506.10947) - Random and incorrect rewards still help some models, a warning about model-specific priors.
 - [Reinforcement Learning for Reasoning in Large Language Models with One Training Example](https://arxiv.org/abs/2504.20571) - 1-shot RLVR and what it reveals about RL as elicitation.
 - [The Entropy Mechanism of Reinforcement Learning for Reasoning Language Models](https://arxiv.org/abs/2505.22617) - Entropy collapse, its cause in covariance, and interventions.
-- [Why We Think](https://lilianweng.github.io/posts/2025-05-01-thinking/) - Lilian Weng on test-time compute and reasoning, with a broad literature map.
+- [Spurious Rewards: Rethinking Training Signals in RLVR](https://arxiv.org/abs/2506.10947) - Random and incorrect rewards still help some models, a warning about model-specific priors.
 
 ## 8. Process rewards, verifiers, and test-time compute
 
 - [Let's Verify Step by Step](https://arxiv.org/abs/2305.20050) - Process supervision beats outcome supervision for math, and PRM800K.
 - [Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations](https://arxiv.org/abs/2312.08935) - Automatically labeled process rewards via rollouts.
+- [Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters](https://arxiv.org/abs/2408.03314) - Compute-optimal search and revision at inference time.
+- [Generative Verifiers: Reward Modeling as Next-Token Prediction](https://arxiv.org/abs/2408.15240) - Verifiers that reason before judging.
 - [The Lessons of Developing Process Reward Models in Mathematical Reasoning](https://arxiv.org/abs/2501.07301) - Practical pitfalls of PRM data and evaluation.
 - [Process Reinforcement through Implicit Rewards](https://arxiv.org/abs/2502.01456) - PRIME: dense rewards from an implicit PRM trained online.
-- [Generative Verifiers: Reward Modeling as Next-Token Prediction](https://arxiv.org/abs/2408.15240) - Verifiers that reason before judging.
-- [Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters](https://arxiv.org/abs/2408.03314) - Compute-optimal search and revision at inference time.
+- [Why We Think](https://lilianweng.github.io/posts/2025-05-01-thinking/) - Lilian Weng on test-time compute and reasoning, with a broad literature map.
 
 ## 9. Distillation
 
+For distillation inside full post-training pipelines, see MiMo-V2-Flash, Nemotron-Cascade 2, and DeepSeek-V4 in [section 15](#15-open-recipes-and-technical-reports).
+
+- [MiniLLM: On-Policy Distillation of Large Language Models](https://arxiv.org/abs/2306.08543) - Reverse-KL distillation for generative models.
 - [On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/abs/2306.13649) - GKD: distill on student-generated sequences.
-- [MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2306.08543) - Reverse-KL distillation for generative models.
 - [On-Policy Distillation](https://thinkingmachines.ai/blog/on-policy-distillation/) - Thinking Machines: dense teacher supervision on student rollouts matches RL at a fraction of the cost.
 - [MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training](https://arxiv.org/abs/2606.30406) - The method behind MiMo's post-training, studied in isolation on open models: merge RL-trained domain teachers into one student.
-- [Nemotron-Cascade 2](https://arxiv.org/abs/2603.19220) - Multi-domain on-policy distillation used to merge separately RL-trained domain experts.
 
 ## 10. Agentic and multi-turn RL
 
@@ -200,19 +201,19 @@ Papers that try to explain why RLVR works, and where it doesn't.
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) - The interleaved reason/act format most agent trajectories still use.
 - [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761) - Self-supervised tool-use data.
 - [ArCHer: Training Language Model Agents via Hierarchical Multi-Turn RL](https://arxiv.org/abs/2402.19446) - Turn-level critics for multi-turn RL.
+- [Training Software Engineering Agents and Verifiers with SWE-Gym](https://arxiv.org/abs/2412.21139) - Executable repo environments for training SWE agents.
 - [Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning](https://arxiv.org/abs/2503.09516) - RL with retrieval in the loop.
 - [ReTool: Reinforcement Learning for Strategic Tool Use in LLMs](https://arxiv.org/abs/2504.11536) - RL that interleaves code execution with reasoning.
 - [RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning](https://arxiv.org/abs/2504.20073) - Multi-turn RL instabilities ("echo trap") and fixes.
-- [Training Software Engineering Agents and Verifiers with SWE-Gym](https://arxiv.org/abs/2412.21139) - Executable repo environments for training SWE agents.
 - [SWE-smith: Scaling Data for Software Engineering Agents](https://arxiv.org/abs/2504.21798) - Synthesizing thousands of SWE task instances.
-- [Demystifying Reinforcement Learning for Long-Horizon Tool-Using Agents](https://arxiv.org/abs/2603.21972) - A full recipe and ablations for long-horizon agent RL.
+- [Demystifying Reinforcement Learning for Long-Horizon Tool-Using Agents: A Comprehensive Recipe](https://arxiv.org/abs/2603.21972) - A full recipe and ablations for long-horizon agent RL.
 - [One sandbox per rollout, or how labs run RL for agents in 2026](https://huggingface.co/blog/sergiopaniego/rl-environments-2026) - How tasks, environments, sandboxes, and trainers fit together in current agent RL stacks.
 
 ## 11. Reward hacking, safety, and failure modes
 
-- [Reward Hacking in Reinforcement Learning](https://lilianweng.github.io/posts/2024-11-28-reward-hacking/) - Lilian Weng's survey of reward hacking, from classic RL to RLHF.
 - [Towards Understanding Sycophancy in Language Models](https://arxiv.org/abs/2310.13548) - How preference optimization rewards telling people what they want to hear.
 - [Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training](https://arxiv.org/abs/2401.05566) - Backdoors that survive SFT, RLHF, and adversarial training.
+- [Reward Hacking in Reinforcement Learning](https://lilianweng.github.io/posts/2024-11-28-reward-hacking/) - Lilian Weng's survey of reward hacking, from classic RL to RLHF.
 - [Alignment faking in large language models](https://arxiv.org/abs/2412.14093) - A model strategically complying during training to preserve its preferences.
 - [Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation](https://arxiv.org/abs/2503.11926) - CoT monitors catch reward hacking, but optimizing against them teaches obfuscation.
 - [Natural Emergent Misalignment from Reward Hacking in Production RL](https://arxiv.org/abs/2511.18397) - Learning to reward-hack in coding environments generalizes to broader misalignment.
@@ -227,15 +228,15 @@ Papers that try to explain why RLVR works, and where it doesn't.
 
 RL for LLMs is mostly an inference problem with a training step attached. These cover how to keep the GPUs busy.
 
-- [HybridFlow: A Flexible and Efficient RLHF Framework](https://arxiv.org/abs/2409.19256) - The design behind verl: single-controller orchestration with multi-controller workers.
 - [OpenRLHF: An Easy-to-use, Scalable and High-performance RLHF Framework](https://arxiv.org/abs/2405.11143) - Ray plus vLLM separation of generation and training.
+- [HybridFlow: A Flexible and Efficient RLHF Framework](https://arxiv.org/abs/2409.19256) - The design behind verl: single-controller orchestration with multi-controller workers.
 - [Asynchronous RLHF: Faster and More Efficient Off-Policy RL for Language Models](https://arxiv.org/abs/2410.18252) - How off-policy you can go when overlapping generation and training.
 - [AReaL: A Large-Scale Asynchronous Reinforcement Learning System for Language Reasoning](https://arxiv.org/abs/2505.24298) - Fully asynchronous RL with staleness-aware PPO.
-- [Keep the Tokens Flowing: Lessons from 16 Open-Source RL Libraries](https://huggingface.co/blog/async-rl-training-landscape) - Comparative survey of async RL designs across today's open frameworks.
-- [Defeating Nondeterminism in LLM Inference](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/) - Batch-invariant kernels, and why sampler/trainer mismatch matters for on-policy RL.
 - [Your Efficient RL Framework Secretly Brings You Off-Policy RL Training](https://fengyao.notion.site/off-policy-rl) - vLLM and FSDP disagree on token probabilities for the same weights; truncated importance sampling fixes it.
-- [Stabilizing Reinforcement Learning with LLMs: Formulation and Practices](https://arxiv.org/abs/2512.01374) - The Qwen team's first-principles account of when the token-level surrogate is valid, and the routing-replay and IS-correction tricks that keep MoE RL stable.
+- [Defeating Nondeterminism in LLM Inference](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/) - Batch-invariant kernels, and why sampler/trainer mismatch matters for on-policy RL.
 - [Defeating the Training-Inference Mismatch via FP16](https://arxiv.org/abs/2510.26788) - Precision choice as a fix for rollout/training numerical drift.
+- [Stabilizing Reinforcement Learning with LLMs: Formulation and Practices](https://arxiv.org/abs/2512.01374) - The Qwen team's first-principles account of when the token-level surrogate is valid, and the routing-replay and IS-correction tricks that keep MoE RL stable.
+- [Keep the Tokens Flowing: Lessons from 16 Open-Source RL Libraries](https://huggingface.co/blog/async-rl-training-landscape) - Comparative survey of async RL designs across today's open frameworks.
 
 ## 14. Frameworks and libraries
 
@@ -263,7 +264,7 @@ RL for LLMs is mostly an inference problem with a training step attached. These 
 **Environments**
 
 - [OpenEnv](https://github.com/huggingface/OpenEnv) - Shared interface spec and hub for agentic RL environments.
-- [Environments Hub](https://www.primeintellect.ai/blog/environments) - Open registry of RL environments built on verifiers.
+- [Environments Hub](https://app.primeintellect.ai/dashboard/environments) - Open registry of RL environments built on verifiers.
 - [Harbor](https://github.com/harbor-framework/harbor) - Containerized agent evaluation and rollout harness from the Terminal-Bench team.
 - [BrowserGym](https://github.com/ServiceNow/BrowserGym) - Web-agent environments under one gym interface.
 - [TextArena](https://github.com/TextArena/TextArena) - Text-based games for multi-agent and self-play RL.
@@ -280,24 +281,24 @@ Read these for what labs actually do. The post-training sections are usually the
 
 **Open recipes** (post-training data, code, or RL environments released)
 
-- [Tülu 3](https://arxiv.org/abs/2411.15124) - SFT → DPO → RLVR with every ablation published.
+- [Tülu 3: Pushing Frontiers in Open Language Model Post-Training](https://arxiv.org/abs/2411.15124) - SFT → DPO → RLVR with every ablation published.
 - [SmolLM3: smol, multilingual, long-context reasoner](https://huggingface.co/blog/smollm3) - Dual-mode reasoning in a 3B model, with mid-training, SFT, and APO all released.
 - [Olmo 3](https://arxiv.org/abs/2512.13961) - Instruct, Think, and RL-Zero tracks, plus the OlmoRL infrastructure and data.
 - [INTELLECT-3: Technical Report](https://arxiv.org/abs/2512.16144) - Large-scale RL on a 100B+ MoE with prime-rl and community-built verifiers environments.
 - [Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation](https://arxiv.org/abs/2603.19220) - Sequential domain-wise RL stages, then on-policy distillation to merge them, with data released.
-- [Nemotron 3 Super](https://arxiv.org/abs/2604.12374) - Open hybrid Mamba-Transformer MoE with an agent-focused SFT and multi-environment RL pipeline and released post-training data.
+- [Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning](https://arxiv.org/abs/2604.12374) - Open hybrid Mamba-Transformer MoE with an agent-focused SFT and multi-environment RL pipeline and released post-training data.
 - [Nemotron 3 Ultra Technical Report](https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf) - The largest Nemotron 3 model, with its agent-focused post-training pipeline and the Nemotron-Posttraining-v3 datasets.
 - [Instella-MoE Technical Report](https://arxiv.org/abs/2609.00791) - Fully open MoE whose post-training runs SFT, DPO, instruction-following RL, then multi-teacher on-policy distillation.
 - [MiMo-V2.6 Technical Report](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL/blob/main/MiMo_V2_6_technical_report.pdf) - The most open frontier-scale RL run so far: asynchronous GRPO at ~25k trajectories per step, a cost breakdown (rollouts vs. training vs. grader), and multi-prefix multi-teacher on-policy distillation. Ships with ~7,000 [RL environments and verifiers](https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss) and the [training framework](https://github.com/XiaomiMiMo/verl).
 
 **Open-weight frontier models**
 
-- [Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783) - Iterative rounds of SFT, rejection sampling, and DPO, with detail on data mixes.
+- [Nemotron-4 340B Technical Report](https://arxiv.org/abs/2406.11704) - Synthetic-data-heavy alignment with iterative weak-to-strong alignment.
+- [The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783) - Iterative rounds of SFT, rejection sampling, and DPO, with detail on data mixes.
 - [DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437) - R1 distillation into a general chat model, plus GRPO with rule and model rewards.
 - [Qwen3 Technical Report](https://arxiv.org/abs/2505.09388) - Four-stage pipeline: long-CoT cold start, reasoning RL, thinking-mode fusion, general RL. Then strong-to-weak distillation.
-- [MiniMax-M1](https://arxiv.org/abs/2506.13585) - Large-scale RL with CISPO on a hybrid-attention model, and the cost accounting to go with it.
 - [Kimi K2: Open Agentic Intelligence](https://arxiv.org/abs/2507.20534) - Agentic data synthesis and joint RL with verifiable and self-critique rubric rewards.
-- [GLM-4.5](https://arxiv.org/abs/2508.06471) - Expert models per domain, unified by self-distillation; the slime RL stack.
+- [GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models](https://arxiv.org/abs/2508.06471) - Expert models per domain, unified by self-distillation; the slime RL stack.
 - [gpt-oss-120b & gpt-oss-20b Model Card](https://arxiv.org/abs/2508.10925) - OpenAI's open-weight reasoning models: CoT-RL training, variable reasoning effort, and safety evaluations.
 - [Introducing LongCat-Flash-Thinking: A Technical Report](https://arxiv.org/abs/2509.18883) - DORA, an asynchronous rollout orchestration system that trains >3x faster than synchronous RL, and domain-parallel RL with later fusion.
 - [DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models](https://arxiv.org/abs/2512.02556) - Scaled-up GRPO with unbiased KL estimation and off-policy masking, plus large-scale synthetic agent environments.
@@ -309,8 +310,8 @@ Read these for what labs actually do. The post-training sections are usually the
 - [Qwen3.5: Towards Native Multimodal Agents](https://qwen.ai/blog?id=qwen3.5) - Qwen attributes most of the post-training gains to scaling RL across virtually all tasks and environments.
 - [Qwen3-Coder-Next Technical Report](https://arxiv.org/abs/2603.00729) - Agentic coding RL on large numbers of executable environments.
 - [The MiniMax-M2 Series: Mini Activations Unleashing Max Real-World Intelligence](https://arxiv.org/abs/2605.26494) - Interleaved-thinking agent model trained with large-scale agentic RL.
+- [Ling and Ring 2.6 Technical Report: Efficient and Instant Agentic Intelligence at Trillion-Parameter Scale](https://arxiv.org/abs/2606.15079) - Trillion-scale instant (Ling) and reasoning (Ring) models: Evo-CoT, shortest-correct-response distillation for token efficiency, and the KPop async RL framework.
 - [DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence](https://arxiv.org/abs/2606.19348) - Specialist experts trained separately, consolidated by on-policy distillation; FP4 QAT during post-training.
-- [Ling and Ring 2.6 Technical Report](https://arxiv.org/abs/2606.15079) - Trillion-scale instant (Ling) and reasoning (Ring) models: Evo-CoT, shortest-correct-response distillation for token efficiency, and the KPop async RL framework.
 - [Gemma 4 Technical Report](https://arxiv.org/abs/2607.02770) - Small open models (2B-31B) with a thinking mode and quantization-aware training; useful as a reference for post-training at small scale.
 - [Kimi K3: Open Frontier Intelligence](https://arxiv.org/abs/2607.24653) - RL across general, agentic, and coding domains with multiple reasoning-effort levels, and QAT throughout SFT and RL.
 - [GLM-5.3](https://z.ai/blog/glm-5.3) - Same base model as GLM-5.2; every gain comes from scaling post-training alone (more environments, longer runs on slime). The clearest public case that post-training scale is now a lever on its own.
@@ -320,7 +321,6 @@ Read these for what labs actually do. The post-training sections are usually the
 
 - [Phi-4-reasoning Technical Report](https://arxiv.org/abs/2504.21318) - Careful SFT data selection plus short outcome-based RL.
 - [Llama-Nemotron: Efficient Reasoning Models](https://arxiv.org/abs/2505.00949) - Reasoning toggle, SFT from R1, and large-scale RL.
-- [Nemotron-4 340B Technical Report](https://arxiv.org/abs/2406.11704) - Synthetic-data-heavy alignment with iterative weak-to-strong alignment.
 
 ## 16. Datasets
 
@@ -329,23 +329,25 @@ Read these for what labs actually do. The post-training sections are usually the
 - [HelpSteer3](https://huggingface.co/datasets/nvidia/HelpSteer3) - Multi-attribute human preference data across code, multilingual, and general domains.
 - [OpenThoughts3](https://huggingface.co/datasets/open-thoughts/OpenThoughts3-1.2M) - 1.2M reasoning traces for SFT.
 - [NuminaMath-1.5](https://huggingface.co/datasets/AI-MO/NuminaMath-1.5) - Competition math problems with solutions, a common RLVR prompt source.
-- [OpenMathReasoning](https://arxiv.org/abs/2504.16891) - Large math reasoning corpus behind the AIMO-2 winning solution.
+- [AIMO-2 Winning Solution: Building State-of-the-Art Mathematical Reasoning Models with OpenMathReasoning dataset](https://arxiv.org/abs/2504.16891) - The OpenMathReasoning corpus, a large math reasoning dataset behind the AIMO-2 winning solution.
 - [MiMo-V2.6-RL-oss](https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss) - ~7,000 RL environments with verifiers across code, cyber, knowledge work, web, and music, from a frontier RL run.
 - [SWE-smith dataset](https://huggingface.co/datasets/SWE-bench/SWE-smith) - Synthetic executable SWE tasks for agent training.
 
 ## 17. Evaluation
 
+Grouped by what they measure: judges and arenas, instruction following, reward models, knowledge, code, and agents.
+
 - [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685) - LLM judges, their biases, and agreement with humans.
 - [Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference](https://arxiv.org/abs/2403.04132) - Crowdsourced pairwise evaluation.
-- [Length-Controlled AlpacaEval](https://arxiv.org/abs/2404.04475) - Correcting judge length bias.
+- [Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators](https://arxiv.org/abs/2404.04475) - Correcting judge length bias.
 - [Instruction-Following Evaluation for Large Language Models (IFEval)](https://arxiv.org/abs/2311.07911) - Verifiable instruction constraints, also used as RL rewards.
 - [RewardBench: Evaluating Reward Models for Language Modeling](https://arxiv.org/abs/2403.13787) - The standard reward model benchmark.
 - [GPQA: A Graduate-Level Google-Proof Q&A Benchmark](https://arxiv.org/abs/2311.12022) - Hard expert science questions.
-- [LiveCodeBench](https://arxiv.org/abs/2403.07974) - Contamination-aware coding evaluation.
-- [SWE-bench](https://arxiv.org/abs/2310.06770) - Real GitHub issues as agent tasks.
-- [τ-bench](https://arxiv.org/abs/2406.12045) - Tool-agent-user interaction with policy constraints.
-- [Terminal-Bench](https://www.tbench.ai/) - Agents completing tasks in real terminal environments.
 - [Humanity's Last Exam](https://arxiv.org/abs/2501.14249) - Frontier-difficulty closed-ended questions across subjects.
+- [LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code](https://arxiv.org/abs/2403.07974) - Contamination-aware coding evaluation.
+- [SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://arxiv.org/abs/2310.06770) - Real GitHub issues as agent tasks.
+- [τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains](https://arxiv.org/abs/2406.12045) - Tool-agent-user interaction with policy constraints.
+- [Terminal-Bench](https://www.tbench.ai/) - Agents completing tasks in real terminal environments.
 
 ## 18. Books, courses, and blogs
 
@@ -374,8 +376,8 @@ Reading is not enough. Each of these is small enough to finish and teaches somet
 Recent work that is promising but not yet settled. Expect some of these to age quickly.
 
 - [Rethinking RL for LLM Reasoning: It's Sparse Policy Selection, Not Capability Learning](https://arxiv.org/abs/2605.06241) - Extends the "RL sharpens rather than teaches" line of work, and argues that much cheaper methods recover most of RLVR's gains.
-- [OpenThoughts-Agent: Data Recipes for Agentic Models](https://arxiv.org/abs/2606.24855) - OpenThoughts-style controlled data ablations, applied to agent trajectories.
 - [RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards](https://arxiv.org/abs/2605.10899) - Pushing rubric rewards further into non-verifiable tasks.
+- [OpenThoughts-Agent: Data Recipes for Agentic Models](https://arxiv.org/abs/2606.24855) - OpenThoughts-style controlled data ablations, applied to agent trajectories.
 
 ---
 
